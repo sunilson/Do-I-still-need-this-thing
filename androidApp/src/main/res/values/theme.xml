@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="App.Theme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorSecondary">@color/colorPrimary</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/darkGray</item>
+        <item name="shapeAppearanceSmallComponent">@style/App.Shape.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/App.Shape.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/App.Shape.LargeComponent</item>
+        <item name="floatingActionButtonStyle">@style/App.Widget.FloatingActionButton</item>
+        <item name="textAppearanceHeadline5">@style/App.Widget.Text.Headline5</item>
+    </style>
+</resources>
+
+

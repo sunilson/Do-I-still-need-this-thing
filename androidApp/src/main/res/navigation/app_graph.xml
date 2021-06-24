@@ -9,16 +9,42 @@
             android:id="@+id/homeFragment"
             android:name="at.sunilson.doistillneedthisthing.androidApp.presentation.home.HomeFragment"
             android:label="HomeFragment"
-            tools:layout="@layout/fragment_compose" >
+            tools:layout="@layout/fragment_compose">
         <action
                 android:id="@+id/add_item"
-                app:destination="@id/addItemFragment" />
+                app:destination="@id/addItemFragment"
+                app:enterAnim="@anim/move_in_from_right"
+                app:exitAnim="@anim/move_out_to_left_slightly"
+                app:popEnterAnim="@anim/move_in_from_left_slightly"
+                app:popExitAnim="@anim/move_out_to_right" />
+        <action
+                android:id="@+id/show_settings"
+                app:destination="@id/settingsFragment"
+                app:enterAnim="@anim/move_in_from_right"
+                app:exitAnim="@anim/move_out_to_left_slightly"
+                app:popEnterAnim="@anim/move_in_from_left_slightly"
+                app:popExitAnim="@anim/move_out_to_right" />
     </fragment>
 
     <fragment
             android:id="@+id/addItemFragment"
             android:name="at.sunilson.doistillneedthisthing.androidApp.presentation.additem.AddItemFragment"
             android:label="Add Item Fragment"
-            tools:layout="@layout/fragment_add_item" />
+            tools:layout="@layout/fragment_add_item">
+        <action
+                android:id="@+id/set_item_details"
+                app:destination="@id/setItemDetailsDialogFragment" />
+    </fragment>
+
+    <dialog
+            android:id="@+id/setItemDetailsDialogFragment"
+            android:name="at.sunilson.doistillneedthisthing.androidApp.presentation.setitemdetails.SetItemDetailsDialogFragment"
+            android:label="SetItemDetailsDialogFragment"
+            tools:layout="@layout/fragment_compose" />
+    <fragment
+            android:id="@+id/settingsFragment"
+            android:name="at.sunilson.doistillneedthisthing.androidApp.presentation.settings.SettingsFragment"
+            android:label="SettingsDialogFragment"
+            tools:layout="@layout/fragment_compose" />
 
 </navigation>

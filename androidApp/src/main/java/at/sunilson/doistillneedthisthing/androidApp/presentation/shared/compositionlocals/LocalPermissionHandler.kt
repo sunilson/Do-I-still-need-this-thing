@@ -1,4 +1,4 @@
-package at.sunilson.doistillneedthisthing.presentation.shared.compositionlocals
+package at.sunilson.doistillneedthisthing.androidApp.presentation.shared.compositionlocals
 
 import androidx.compose.runtime.compositionLocalOf
 

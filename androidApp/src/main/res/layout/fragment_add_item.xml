@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true">
 
     <androidx.camera.view.PreviewView
             android:id="@+id/preview_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/compose_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:composableName="AddItemOverlay" />
+
+    <at.sunilson.doistillneedthisthing.androidApp.presentation.additem.ObjectBoundingBoxesView
+            android:id="@+id/object_bounding_boxes_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

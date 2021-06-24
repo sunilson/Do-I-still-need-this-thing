@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="back_description">Back button</string>
+    <string name="capture_button_content_description">Capture button</string>
+    <string name="menu_button_content_description">Menu button</string>
+    <string name="toggle_object_detection_button_description">Toggle object detection button</string>
+    <string name="toggle_flash_button_description">Toggle torchlight button</string>
+    <string name="settings_all_notifications_title">Mute notifications</string>
+    <string name="settings_all_notifications_subtitle">Mute all notifications no matter the system settings</string>
+    <string name="settings_notifications_title">Manage notifications</string>
+    <string name="settings_notifications_subtitle">Enable/Disable all notifications or per channel</string>
+    <string name="settings_language_title">Change language</string>
+    <string name="settings_language_subtitle">Manage the language for this device</string>
 </resources>

@@ -1,6 +1,5 @@
-package at.sunilson.doistillneedthisthing.domain.shared
+package at.sunilson.doistillneedthisthing.shared.domain.shared
 
-import at.sunilson.doistillneedthisthing.shared.domain.shared.CoroutineDispatchers
 import com.github.michaelbull.result.Result
 import com.github.michaelbull.result.runCatching
 import kotlinx.coroutines.CoroutineDispatcher

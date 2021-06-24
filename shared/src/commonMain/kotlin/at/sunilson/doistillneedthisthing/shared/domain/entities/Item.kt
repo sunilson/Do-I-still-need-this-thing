@@ -1,20 +1,28 @@
 package at.sunilson.doistillneedthisthing.shared.domain.entities
 
-import android.net.Uri
-
 data class Item(
-    val id: Int,
     val name: String,
-    val image: Uri,
+    val imagePath: String,
     val addedTimestamp: Long,
-    val lastCheckedTimestamp: Long = NEVER_CHECKED,
-    val stillNeeded: Boolean = true,
-    val notNeededAnymoreTimestamp: Long? = null,
+    val lastCheckedTimestamp: Long? = null,
+    val markedForRemovalTimestamp: Long? = null,
+    val removedTimestamp: Long? = null,
     val location: String? = null
 ) {
+    var id: Long = NO_ID
+
+    val state: State
+        get() = when {
+            removedTimestamp != null -> State.REMOVED
+            markedForRemovalTimestamp != null -> State.NOT_NEEDED
+            else -> State.NEEDED
+        }
 
     companion object {
-        const val NEVER_CHECKED = -1L
+        const val NO_ID = -1L
     }
 
+    enum class State {
+        NEEDED, NOT_NEEDED, REMOVED
+    }
 }

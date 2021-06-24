@@ -1,4 +1,4 @@
-package at.sunilson.doistillneedthisthing.presentation.shared.theme
+package at.sunilson.doistillneedthisthing.androidApp.presentation.shared.theme
 
 import androidx.compose.ui.graphics.Color
 

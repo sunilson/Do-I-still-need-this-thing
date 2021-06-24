@@ -4,12 +4,14 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import at.sunilson.doistillneedthisthing.presentation.shared.compositionlocals.PermissionHandler
+import at.sunilson.doistillneedthisthing.androidApp.presentation.shared.compositionlocals.PermissionHandler
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), PermissionHandler {
 
     private val permissionLauncher =

@@ -1,0 +1,10 @@
+CREATE TABLE DatabaseSettings (
+    id INTEGER NOT NULL PRIMARY KEY,
+    notifications_enabled INTEGER NOT NULL CHECK (notifications_enabled IN (0, 1))
+);
+
+get:
+SELECT * FROM DatabaseSettings WHERE id = 1;
+
+insert:
+INSERT OR REPLACE INTO DatabaseSettings (id, notifications_enabled) VALUES (1, ?);

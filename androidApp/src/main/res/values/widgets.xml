@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="App.Widget.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="materialThemeOverlay">@style/App.Widget.FloatingActionButton.ThemeOverlay</item>
+        <item name="tint">@android:color/white</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
+    </style>
+
+    <style name="App.Widget.FloatingActionButton.Large">
+        <item name="fabCustomSize">80dp</item>
+        <item name="iconSize">36dp</item>
+    </style>
+
+    <style name="App.Widget.FloatingActionButton.ThemeOverlay" parent="">
+        <item name="shapeAppearanceSmallComponent">@style/App.Shape.FloatingActionButton</item>
+    </style>
+</resources>

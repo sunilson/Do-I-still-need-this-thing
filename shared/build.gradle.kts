@@ -4,14 +4,16 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     id("com.squareup.sqldelight")
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
-    compileSdkVersion(29)
+    compileSdkVersion(30)
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdkVersion(24)
-        targetSdkVersion(29)
+        targetSdkVersion(30)
     }
 
     configurations {
@@ -27,7 +29,12 @@ android {
 sqldelight {
     database("Database") { // This will be the name of the generated database class.
         packageName = "at.sunilson.doistillneedthisthing"
+        dialect = "sqlite:3.25"
     }
+}
+
+kapt {
+    correctErrorTypes = true
 }
 
 kotlin {
@@ -50,10 +57,11 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("com.michael-bull.kotlin-result:kotlin-result:1.1.11")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
-                implementation("com.squareup.sqldelight:coroutines-extensions:1.4.4")
-                implementation("com.squareup.sqldelight:runtime:1.4.4")
+                api("com.michael-bull.kotlin-result:kotlin-result:1.1.11")
+                api("com.michael-bull.kotlin-result:kotlin-result-coroutines:1.1.11")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
+                implementation("com.squareup.sqldelight:coroutines-extensions:1.5.0")
+                implementation("com.squareup.sqldelight:runtime:1.5.0")
                 implementation("com.github.aakira:napier:1.5.0-alpha1")
                 api("org.jetbrains.kotlinx:kotlinx-datetime:0.1.1")
             }
@@ -66,9 +74,12 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3")
-                implementation("com.squareup.sqldelight:android-driver:1.4.4")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
+                implementation("com.squareup.sqldelight:android-driver:1.5.0")
                 implementation("com.google.android.material:material:1.3.0")
+                implementation("com.google.dagger:hilt-android:$HILT_VERSION")
+                configurations["kapt"].dependencies.add(project.dependencies.create("com.google.dagger:hilt-compiler:$HILT_VERSION"))
+                configurations["kapt"].dependencies.add(project.dependencies.create("androidx.hilt:hilt-compiler:1.0.0"))
             }
         }
         val androidTest by getting {
@@ -79,7 +90,7 @@ kotlin {
         }
         val iosMain by getting {
             dependencies {
-                implementation("com.squareup.sqldelight:native-driver:1.4.4")
+                implementation("com.squareup.sqldelight:native-driver:1.5.0")
             }
         }
         val iosTest by getting

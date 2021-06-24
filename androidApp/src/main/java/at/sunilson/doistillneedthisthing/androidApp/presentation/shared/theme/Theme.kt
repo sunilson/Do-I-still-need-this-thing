@@ -1,10 +1,12 @@
-package at.sunilson.doistillneedthisthing.presentation.shared.theme
+package at.sunilson.doistillneedthisthing.androidApp.presentation.shared.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import at.sunilson.doistillneedthisthing.presentation.shared.theme.Shapes
+import at.sunilson.doistillneedthisthing.presentation.shared.theme.Typography
 
 private val DarkColorPalette = darkColors(
     primary = Purple200,

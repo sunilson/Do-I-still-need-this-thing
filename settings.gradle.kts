@@ -12,4 +12,3 @@ rootProject.name = "DoIstillneedthisthing"
 
 include(":androidApp")
 include(":shared")
-

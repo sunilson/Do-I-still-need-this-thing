@@ -1,0 +1,24 @@
+CREATE TABLE DatabaseItem (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    image_path TEXT NOT NULL,
+    added_timestamp INTEGER NOT NULL,
+    last_checked_timestamp INTEGER,
+    marked_for_removal_timestamp INTEGER,
+    removal_timestamp INTEGER,
+    location TEXT
+);
+
+getAll:
+SELECT * FROM DatabaseItem;
+
+getNeeded:
+SELECT * FROM DatabaseItem WHERE marked_for_removal_timestamp IS NULL AND removal_timestamp IS NULL;
+
+insert:
+INSERT INTO DatabaseItem (name, image_path, added_timestamp, last_checked_timestamp, marked_for_removal_timestamp, removal_timestamp, location) VALUES (?, ?, ?, ?, ?, ?, ?);
+
+upsert:
+INSERT INTO DatabaseItem (id, name, image_path, added_timestamp, last_checked_timestamp, marked_for_removal_timestamp, removal_timestamp, location) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+ON CONFLICT (id)
+DO UPDATE SET marked_for_removal_timestamp = excluded.marked_for_removal_timestamp;
