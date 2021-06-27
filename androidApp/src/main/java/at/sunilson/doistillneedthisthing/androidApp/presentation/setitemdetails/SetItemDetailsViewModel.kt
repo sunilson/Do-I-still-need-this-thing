@@ -57,7 +57,7 @@ class SetItemDetailsViewModel @Inject constructor(
 
     private fun classifyLoadedImage() = intent {
         classifyImage(state.processedBitmap ?: return@intent).onSuccess {
-            reduce { state.copy(classifiedLabel = it?.capitalize(Locale.getDefault())) }
+            reduce { state.copy(classifiedLabel = it?.replaceFirstChar { it.toUpperCase() }) }
         }
     }
 

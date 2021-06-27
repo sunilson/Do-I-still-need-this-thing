@@ -10,9 +10,6 @@ class AddItem(private val database: Database) : UseCase<Item, Unit>() {
             params.name,
             params.imagePath,
             params.addedTimestamp,
-            null,
-            null,
-            null,
             params.location
         )
     }

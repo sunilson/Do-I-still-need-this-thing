@@ -39,14 +39,14 @@ class NeededItemsListViewModel @Inject constructor(
     }
 
     fun itemNotNeededClicked(item: Item) = intent {
-        markItemAsNotNeeded(item).fold(
+        markItemAsNotNeeded(item.id).fold(
             { Timber.d("Marked $item as not needed!") },
             { Timber.e(it, "Could not mark $item as not needed!") }
         )
     }
 
     fun itemRemovedClicked(item: Item) = intent {
-        markItemAsRemoved(item).fold(
+        markItemAsRemoved(item.id).fold(
             { Timber.d("Marked $item as removed!") },
             { Timber.e(it, "Could not mark $item as removed!") }
         )

@@ -19,7 +19,11 @@ class GetSettings(private val database: Database) : FlowUseCase<Unit, Settings>(
                 if (databaseSettings == null) {
                     Settings()
                 } else {
-                    Settings(databaseSettings.notifications_enabled == 1L)
+                    Settings(
+                        databaseSettings.notifications_enabled == 1L,
+                        databaseSettings.random_single_decisions_per_day.toInt(),
+                        databaseSettings.decisions_per_weekly.toInt()
+                    )
                 }
             }
     }

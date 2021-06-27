@@ -1,0 +1,9 @@
+CREATE TABLE WeeklyNotifications (
+   timestamp INTEGER NOT NULL PRIMARY KEY
+);
+
+insert:
+INSERT INTO WeeklyNotifications (timestamp) VALUES (?);
+
+getLatest:
+SELECT * FROM WeeklyNotifications ORDER BY timestamp DESC LIMIT 1;

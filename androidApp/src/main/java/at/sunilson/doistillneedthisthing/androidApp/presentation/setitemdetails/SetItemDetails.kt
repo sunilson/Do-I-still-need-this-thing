@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.OutlinedTextField
@@ -24,10 +26,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.text.capitalize
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import at.sunilson.doistillneedthisthing.androidApp.R
@@ -35,6 +44,7 @@ import at.sunilson.doistillneedthisthing.androidApp.presentation.shared.extensio
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.imePadding
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun SetItemDetails(imageUri: Uri, viewModel: SetItemDetailsViewModel = viewModel()) {
     LaunchedEffect(true) { viewModel.imageReceived(imageUri) }
@@ -42,7 +52,8 @@ fun SetItemDetails(imageUri: Uri, viewModel: SetItemDetailsViewModel = viewModel
     val state = viewModel.container.stateFlow.collectAsState(initial = SetItemDetailsState())
     val image = state.value.processedBitmap
     val classifiedText = state.value.classifiedLabel
-    val insets = LocalWindowInsets.current
+    val focusRequester = remember { FocusRequester() }
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     var title by remember { mutableStateOf("") }
     var location by remember { mutableStateOf<String?>(null) }
@@ -77,18 +88,32 @@ fun SetItemDetails(imageUri: Uri, viewModel: SetItemDetailsViewModel = viewModel
         OutlinedTextField(
             value = title.orElse { classifiedText.orEmpty() },
             label = { Text("Name") },
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
+            keyboardActions = KeyboardActions { focusRequester.requestFocus() },
             modifier = Modifier
                 .padding(top = 12.dp, start = 12.dp, end = 12.dp)
                 .fillMaxWidth(),
-            onValueChange = { title = it }
+            onValueChange = { title = it.replaceFirstChar { it.uppercase() } }
         )
         OutlinedTextField(
             value = location.orEmpty(),
             label = { Text("Location") },
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+            keyboardActions = KeyboardActions {
+                keyboardController?.hide()
+                viewModel.addItemClicked(
+                    title,
+                    imageUri,
+                    location
+                )
+            },
             modifier = Modifier
                 .padding(top = 12.dp, start = 12.dp, end = 12.dp)
-                .fillMaxWidth(),
-            onValueChange = { location = it }
+                .fillMaxWidth()
+                .focusRequester(focusRequester),
+            onValueChange = { location = it.replaceFirstChar { it.uppercase() } }
         )
 
         Button(

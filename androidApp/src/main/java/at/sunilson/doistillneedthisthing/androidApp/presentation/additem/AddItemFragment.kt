@@ -36,7 +36,9 @@ import at.sunilson.ktx.navigation.navigateSafe
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.android.material.composethemeadapter.MdcTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import timber.log.Timber
 import java.io.File
@@ -115,7 +117,7 @@ class AddItemFragment : Fragment(R.layout.fragment_add_item) {
     }
 
     private suspend fun takeImage() {
-        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
             val imageFile =
                 File(
                     requireContext().getExternalFilesDir(null),
@@ -136,7 +138,7 @@ class AddItemFragment : Fragment(R.layout.fragment_add_item) {
                         }
                     })
             }
-            viewModel.imageCaptured(uri ?: return@launchWhenCreated)
+            viewModel.imageCaptured(uri ?: return@launch)
         }
     }
 
@@ -199,6 +201,7 @@ class AddItemFragment : Fragment(R.layout.fragment_add_item) {
     }
 
     private fun startCamera() {
+        if (camera != null) return
         if (!requireContext().hasPermission(Manifest.permission.CAMERA)) return
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
         cameraProviderFuture.addListener({
@@ -207,7 +210,7 @@ class AddItemFragment : Fragment(R.layout.fragment_add_item) {
             cameraProvider.unbindAll()
             try {
                 camera = cameraProvider.bindToLifecycle(
-                    viewLifecycleOwner,
+                    this,
                     cameraSelector,
                     createImagePreview(),
                     setupImageAnalysis(),

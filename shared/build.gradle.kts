@@ -62,7 +62,7 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
                 implementation("com.squareup.sqldelight:coroutines-extensions:1.5.0")
                 implementation("com.squareup.sqldelight:runtime:1.5.0")
-                implementation("com.github.aakira:napier:1.5.0-alpha1")
+                implementation("io.github.aakira:napier:1.4.1")
                 api("org.jetbrains.kotlinx:kotlinx-datetime:0.1.1")
             }
         }

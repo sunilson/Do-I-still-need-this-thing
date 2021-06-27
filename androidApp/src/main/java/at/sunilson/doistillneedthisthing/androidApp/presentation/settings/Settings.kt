@@ -13,6 +13,9 @@ import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -30,6 +33,8 @@ fun Settings(viewModel: SettingsViewModel = viewModel()) {
     val settings = state.value.settings ?: return
     val scrollState = rememberScrollState()
     val elevation by rememberScrollElevation(scrollState)
+    var dailySliderState by remember { mutableStateOf(settings.randomSingleDecisionsPerDay.toFloat()) }
+    var weeklySliderState by remember { mutableStateOf(settings.decisionsPerWeekly.toFloat()) }
 
     ConstraintLayout(Modifier.fillMaxSize()) {
         val (menuBar, itemList) = createRefs()
@@ -69,6 +74,28 @@ fun Settings(viewModel: SettingsViewModel = viewModel()) {
                 title = stringResource(R.string.settings_notifications_title),
                 subTitle = stringResource(R.string.settings_notifications_subtitle)
             ) { viewModel.notificationSettingsButtonClicked() }
+            SettingsItemSlider(
+                title = stringResource(R.string.settings_random_decisions_amount_title),
+                subTitle = stringResource(R.string.settings_random_decisions_amount_description),
+                value = dailySliderState,
+                valueRange = 0f..10f,
+                onValueChange = { dailySliderState = it },
+                onValueChangeFinished = {
+                    viewModel.randomSingleDecisionsPerDayChanged(
+                        dailySliderState
+                    )
+                },
+                steps = 10
+            )
+            SettingsItemSlider(
+                title = stringResource(R.string.settings_weekly_amount_title),
+                subTitle = stringResource(R.string.settings_weekly_amount_description),
+                value = weeklySliderState,
+                valueRange = 0f..20f,
+                onValueChange = { weeklySliderState = it },
+                onValueChangeFinished = { viewModel.weeklyDecisionsChanged(dailySliderState) },
+                steps = 20
+            )
             SettingsItemAction(
                 title = stringResource(R.string.settings_language_title),
                 subTitle = stringResource(R.string.settings_language_subtitle),

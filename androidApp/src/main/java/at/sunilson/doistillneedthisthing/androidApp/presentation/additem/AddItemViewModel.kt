@@ -61,7 +61,7 @@ class AddItemViewModel @Inject constructor(private val cropBitmapAndSaveToFile: 
                 )
             }
 
-            val (uri, error) = cropBitmapAndSaveToFile(
+            val (uri, _) = cropBitmapAndSaveToFile(
                 CropBitmapParameters(
                     currentCameraBitmap,
                     rotation,

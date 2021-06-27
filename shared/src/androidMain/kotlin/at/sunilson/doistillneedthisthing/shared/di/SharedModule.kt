@@ -6,7 +6,9 @@ import at.sunilson.doistillneedthisthing.shared.domain.AddItem
 import at.sunilson.doistillneedthisthing.shared.domain.GetItemsDeleted
 import at.sunilson.doistillneedthisthing.shared.domain.GetItemsNotNeeded
 import at.sunilson.doistillneedthisthing.shared.domain.GetItemsStillNeeded
+import at.sunilson.doistillneedthisthing.shared.domain.GetRandomDecision
 import at.sunilson.doistillneedthisthing.shared.domain.GetSettings
+import at.sunilson.doistillneedthisthing.shared.domain.MarkItemAsChecked
 import at.sunilson.doistillneedthisthing.shared.domain.MarkItemAsNeeded
 import at.sunilson.doistillneedthisthing.shared.domain.MarkItemAsNotNeeded
 import at.sunilson.doistillneedthisthing.shared.domain.MarkItemAsRemoved
@@ -49,8 +51,17 @@ object SharedModule {
     fun provideMarkItemAsRemoved(database: Database) = MarkItemAsRemoved(database)
 
     @Provides
+    fun provideMarkItemAsChecked(database: Database) = MarkItemAsChecked(database)
+
+    @Provides
     fun provideGetSettings(database: Database) = GetSettings(database)
 
     @Provides
     fun provideUpdateSettings(database: Database) = UpdateSettings(database)
+
+    @Provides
+    fun provideGetRandomDecisions(
+        getSettings: GetSettings,
+        database: Database
+    ) = GetRandomDecision(getSettings, database)
 }

@@ -3,22 +3,29 @@ CREATE TABLE DatabaseItem (
     name TEXT NOT NULL,
     image_path TEXT NOT NULL,
     added_timestamp INTEGER NOT NULL,
-    last_checked_timestamp INTEGER,
-    marked_for_removal_timestamp INTEGER,
-    removal_timestamp INTEGER,
-    location TEXT
+    last_checked_timestamp INTEGER DEFAULT NULL,
+    marked_for_removal_timestamp INTEGER DEFAULT NULL,
+    removal_timestamp INTEGER DEFAULT NULL,
+    location TEXT DEFAULT NULL
 );
 
 getAll:
 SELECT * FROM DatabaseItem;
 
 getNeeded:
-SELECT * FROM DatabaseItem WHERE marked_for_removal_timestamp IS NULL AND removal_timestamp IS NULL;
+SELECT * FROM DatabaseItem WHERE marked_for_removal_timestamp IS NULL AND removal_timestamp IS NULL ORDER BY last_checked_timestamp ASC;
+
+mark_as_checked:
+UPDATE DatabaseItem SET last_checked_timestamp = ? WHERE id = ?;
+
+mark_as_not_needed:
+UPDATE DatabaseItem SET marked_for_removal_timestamp = ?, last_checked_timestamp = ? WHERE id = ?;
+
+mark_as_needed:
+UPDATE DatabaseItem SET marked_for_removal_timestamp = NULL, last_checked_timestamp = ? WHERE id = ?;
+
+mark_as_removed:
+UPDATE DatabaseItem SET marked_for_removal_timestamp = NULL, last_checked_timestamp = NULL, removal_timestamp = ? WHERE id = ?;
 
 insert:
-INSERT INTO DatabaseItem (name, image_path, added_timestamp, last_checked_timestamp, marked_for_removal_timestamp, removal_timestamp, location) VALUES (?, ?, ?, ?, ?, ?, ?);
-
-upsert:
-INSERT INTO DatabaseItem (id, name, image_path, added_timestamp, last_checked_timestamp, marked_for_removal_timestamp, removal_timestamp, location) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-ON CONFLICT (id)
-DO UPDATE SET marked_for_removal_timestamp = excluded.marked_for_removal_timestamp;
+INSERT OR REPLACE INTO DatabaseItem (name, image_path, added_timestamp, location) VALUES (?, ?, ?, ?);

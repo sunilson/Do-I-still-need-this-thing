@@ -26,8 +26,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerVersion = "1.4.32"
-        kotlinCompilerExtensionVersion = "1.0.0-beta07"
+        kotlinCompilerExtensionVersion = "1.0.0-beta09"
     }
 
     kotlinOptions {
@@ -54,9 +53,11 @@ dependencies {
     implementation("androidx.room:room-runtime:2.3.0")
     annotationProcessor("androidx.room:room-compiler:2.3.0")
 
-    val compose_version = "1.0.0-beta09"
-    val camerax_version = "1.1.0-alpha05"
+    val composeVersion = "1.0.0-beta09"
+    val cameraxVersion = "1.1.0-alpha05"
+    val orbitVersion = "3.1.1"
 
+    implementation("androidx.work:work-runtime-ktx:2.7.0-alpha04")
     implementation("com.google.android.material:material:1.3.0")
     implementation("androidx.appcompat:appcompat:1.3.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.0-beta02")
@@ -73,35 +74,29 @@ dependencies {
     implementation("androidx.hilt:hilt-work:1.0.0")
     kapt ("androidx.hilt:hilt-compiler:1.0.0")
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.0-alpha08")
-
-    implementation("androidx.compose.material:material-icons-extended:$compose_version")
-    implementation("androidx.compose.ui:ui:$compose_version")
-    implementation("androidx.compose.material:material:$compose_version")
-    implementation("androidx.compose.ui:ui-tooling:$compose_version")
+    implementation("androidx.compose.material:material-icons-extended:$composeVersion")
+    implementation("androidx.compose.ui:ui:$composeVersion")
+    implementation("androidx.compose.material:material:$composeVersion")
+    implementation("androidx.compose.ui:ui-tooling:$composeVersion")
     implementation("com.google.accompanist:accompanist-insets:0.12.0")
     implementation("com.google.accompanist:accompanist-coil:0.12.0")
     implementation("com.google.accompanist:accompanist-permissions:0.12.0")
-    implementation("com.google.android.material:compose-theme-adapter:$compose_version")
+    implementation("com.google.android.material:compose-theme-adapter:$composeVersion")
     implementation("androidx.navigation:navigation-compose:2.4.0-alpha03")
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
     implementation("androidx.fragment:fragment-ktx:1.4.0-alpha03")
     implementation("com.airbnb.android:lottie-compose:1.0.0-beta07-1")
-
     implementation("com.jakewharton.timber:timber:4.7.1")
     implementation("dev.chrisbanes.insetter:insetter:0.5.0")
-
-    implementation("androidx.camera:camera-camera2:$camerax_version")
-    implementation("androidx.camera:camera-lifecycle:$camerax_version")
+    implementation("androidx.camera:camera-camera2:$cameraxVersion")
+    implementation("androidx.camera:camera-lifecycle:$cameraxVersion")
     implementation("androidx.camera:camera-view:1.0.0-alpha25")
-
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
-
-    implementation("org.orbit-mvi:orbit-core:3.1.1")
-    implementation("org.orbit-mvi:orbit-viewmodel:3.1.1")
-    testImplementation("org.orbit-mvi:orbit-test:3.1.1")
-
+    implementation("org.orbit-mvi:orbit-core:$orbitVersion")
+    implementation("org.orbit-mvi:orbit-viewmodel:$orbitVersion")
+    testImplementation("org.orbit-mvi:orbit-test:$orbitVersion")
     implementation("com.github.sunilson:android-kotlin-extensions:0.54")
 }

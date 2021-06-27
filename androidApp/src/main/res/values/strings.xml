@@ -5,10 +5,23 @@
     <string name="menu_button_content_description">Menu button</string>
     <string name="toggle_object_detection_button_description">Toggle object detection button</string>
     <string name="toggle_flash_button_description">Toggle torchlight button</string>
-    <string name="settings_all_notifications_title">Mute notifications</string>
-    <string name="settings_all_notifications_subtitle">Mute all notifications no matter the system settings</string>
+    <string name="settings_all_notifications_title">Allow notifications</string>
+    <string name="settings_all_notifications_subtitle">Allow notifications or turn all off at once</string>
     <string name="settings_notifications_title">Manage notifications</string>
     <string name="settings_notifications_subtitle">Enable/Disable all notifications or per channel</string>
     <string name="settings_language_title">Change language</string>
     <string name="settings_language_subtitle">Manage the language for this device</string>
+    <string name="settings_random_decisions_amount_title">Max random decisions per day</string>
+    <string name="settings_random_decisions_amount_description">Set how many decision notifications about random items you want to get per day on max</string>
+    <string name="settings_weekly_amount_title">Decisions per weekly reminder</string>
+    <string name="settings_weekly_amount_description">Set how many decisions you want to make on the weekly reminder</string>
+
+    <string name="notification_group_decisions">Decisions</string>
+    <string name="notification_group_general">General</string>
+    <string name="notification_channel_weekly_decisions_title">Weekly decisions</string>
+    <string name="notification_channel_weekly_decisions_description">TODO</string>
+    <string name="notification_channel_daily_decisions_title">Daily decisions</string>
+    <string name="notification_channel_daily_decisions_description">TODO</string>
+    <string name="notification_channel_updates_title">Updates</string>
+    <string name="notification_channel_updates_description">TODO</string>
 </resources>

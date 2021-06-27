@@ -1,10 +1,12 @@
 CREATE TABLE DatabaseSettings (
-    id INTEGER NOT NULL PRIMARY KEY,
-    notifications_enabled INTEGER NOT NULL CHECK (notifications_enabled IN (0, 1))
+    id INTEGER NOT NULL PRIMARY KEY DEFAULT 1,
+    notifications_enabled INTEGER NOT NULL CHECK (notifications_enabled IN (0, 1)) DEFAULT 1,
+    random_single_decisions_per_day INTEGER NOT NULL DEFAULT 3,
+    decisions_per_weekly INTEGER NOT NULL DEFAULT 10
 );
 
 get:
 SELECT * FROM DatabaseSettings WHERE id = 1;
 
 insert:
-INSERT OR REPLACE INTO DatabaseSettings (id, notifications_enabled) VALUES (1, ?);
+INSERT OR REPLACE INTO DatabaseSettings (id, notifications_enabled, random_single_decisions_per_day, decisions_per_weekly) VALUES (1, ?, ?, ?);

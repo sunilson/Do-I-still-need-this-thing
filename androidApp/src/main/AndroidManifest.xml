@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         package="at.sunilson.doistillneedthisthing.androidApp">
 
     <uses-permission android:name="android.permission.CAMERA" />
@@ -11,14 +12,28 @@
             android:label="Do I still need this thing?"
             android:supportsRtl="true"
             android:theme="@style/App.Theme">
+
+        <provider
+                android:name="androidx.startup.InitializationProvider"
+                android:authorities="${applicationId}.androidx-startup"
+                tools:node="remove">
+        </provider>
+
         <activity
                 android:name=".MainActivity"
-                android:windowSoftInputMode="adjustResize"
-                android:screenOrientation="portrait">
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".notifications.DecisionsBroadcastReceiver" android:exported="true">
+            <intent-filter>
+                <action android:name="at.sunilson.doistillneedthisthing.androidApp.notifications.DecisionsBroadcastReceiver.Companion.ACTION_NOT_NEEDED" />
+                <action android:name="at.sunilson.doistillneedthisthing.androidApp.notifications.DecisionsBroadcastReceiver.Companion.ACTION_NEEDED" />
+            </intent-filter>
+        </receiver>
     </application>
 </manifest>

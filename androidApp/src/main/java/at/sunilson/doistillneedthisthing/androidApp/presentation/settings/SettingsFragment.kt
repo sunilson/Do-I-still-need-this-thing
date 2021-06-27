@@ -1,7 +1,6 @@
 package at.sunilson.doistillneedthisthing.androidApp.presentation.settings
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.compose.material.MaterialTheme
