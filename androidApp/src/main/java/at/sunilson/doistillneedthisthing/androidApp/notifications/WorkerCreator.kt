@@ -22,7 +22,7 @@ internal fun createPeriodicWorkers(workManager: WorkManager) {
     workManager.enqueueUniquePeriodicWork(
         "randomSingleDecisions",
         ExistingPeriodicWorkPolicy.KEEP,
-        PeriodicWorkRequestBuilder<RandomDecisionWorker>(15L, TimeUnit.MINUTES)
+        PeriodicWorkRequestBuilder<RandomDecisionWorker>(1L, TimeUnit.HOURS)
             .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
             .build()
     )

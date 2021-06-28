@@ -31,7 +31,7 @@ class ObjectDetectionAnalyzer(private val cb: (ObjectDetectionResult) -> Unit) :
         ObjectDetection.getClient(options)
     }
 
-    @SuppressLint("UnsafeExperimentalUsageError")
+    @SuppressLint("UnsafeExperimentalUsageError", "UnsafeOptInUsageError")
     override fun analyze(imageProxy: ImageProxy) {
         val mediaImage = imageProxy.image
         if (mediaImage == null || !active) {

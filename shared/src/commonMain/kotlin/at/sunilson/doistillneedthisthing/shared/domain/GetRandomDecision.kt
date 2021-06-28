@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import kotlin.random.Random
 
 /**
  * Get a random item that should be reviewed by the user or null if none should be reviewed at this time
@@ -32,16 +33,21 @@ class GetRandomDecision(
             database.dailyNotificationCounterQueries.get(dateString).executeAsOneOrNull()?.counter
                 ?: 0
 
-        // Check if we already shown the max amount of decisions per day or notifications are disabled
+        // Check if we already shown the max amount of decisions per day
         val settings = getSettings(Unit).first()
         if (settings.randomSingleDecisionsPerDay <= counter) {
             Napier.d("Return no random decision because counter maxed out! $counter")
             return null
         }
+
+        // Check if notifications are enabled
         if (!settings.notificationsEnabled) {
             Napier.d("Return no random decision because notifications not enabled!")
             return null
         }
+
+        // Randomize if decision should be requested (1 in 4 chance)
+        if(Random.nextInt(0, 4) != 3) return null
 
         // Get a random item and increase counter
         val items = database.databaseItemQueries.getNeeded().executeAsList().map { it.toItem() }
